@@ -4,10 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Sanctum\HasApiTokens;
 
-class Siswa extends Model
+class Siswa extends Authenticatable
 {
-    use HasFactory;
+    use HasApiTokens,HasFactory;
+
+    protected $table = 'siswas';
 
     protected $fillable = [
         'idSiswa',
@@ -16,7 +20,7 @@ class Siswa extends Model
         'password',
         'tempat',
         'tgl_lahir',
-        'jns_kelamin', ['laki-laki', 'perempuan'],
+        'jns_kelamin',
         'agama',
         'nama_ayah',
         'nama_ibu',

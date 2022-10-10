@@ -22,18 +22,19 @@ return new class extends Migration
             // $table->unsignedBigInteger('idNilai');
             // $table->unsignedBigInteger('idMapel');
             // $table->unsignedBigInteger('idAbsensi');
+            // silahkan custom sendiri untuk database-nya, disesuaikan dengan rancangan
             $table->string('nama');
             $table->string('email');
             $table->string('password');
-            $table->string('tempat');
-            $table->date('tgl_lahir');
-            $table->enum('jns_kelamin', ['laki-laki', 'perempuan']);
-            $table->string('agama');
-            $table->string('nama_ayah');
-            $table->string('nama_ibu');
+            $table->string('tempat')->nullable();
+            $table->date('tgl_lahir')->nullable();
+            $table->enum('jns_kelamin', ['laki-laki', 'perempuan'])->nullable();
+            $table->string('agama')->nullable();
+            $table->string('nama_ayah')->nullable();
+            $table->string('nama_ibu')->nullable();
             $table->text('alamat');
-            $table->string('telepon');
-            $table->string('kd_pos');
+            $table->string('telepon')->nullable();
+            $table->string('kd_pos')->nullable();
             $table->timestamps();
 
             // Kode agar dapat berelasi dengan table lain

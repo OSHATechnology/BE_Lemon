@@ -9,10 +9,10 @@ class BaseController extends Controller
 {
 
     const MESSAGE_ERROR = [
-        "This action is unauthorized." => [
-            "code" => 401,
-            "message" => "unauthorized."
-        ],
+      "This action is unauthorized." => [
+          "code" => 401,
+          "message" => "unauthorized."
+      ],
     ];
 
     /**
