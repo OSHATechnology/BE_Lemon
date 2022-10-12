@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Siswa;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -34,5 +35,6 @@ class SiswaSeeder extends Seeder
         ];
 
         DB::table('siswas')->insert($siswa);
+        Siswa::factory()->count(50)->create();
     }
 }
