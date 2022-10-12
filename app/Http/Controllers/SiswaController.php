@@ -38,7 +38,7 @@ class SiswaController extends BaseController
             $siswa = (SiswaResource::collection(Siswa::all()));
             return $this->sendResponse($siswa, "siswa retrieved successfully");
         } catch (\Throwable $th) {
-            return $this->sendResponse("error siswa retrieved successfully", $th->getMessage());
+            return $this->sendError("error siswa retrieved successfully", $th->getMessage());
         }
     }
 
@@ -68,7 +68,7 @@ class SiswaController extends BaseController
             $siswa->save();
             return $this->sendResponse(new SiswaResource($siswa), 'siswa created successfully');
         } catch (\Throwable $th) {
-            return $this->sendResponse('error creating siswa', $th->getMessage());
+            return $this->sendError('error creating siswa', $th->getMessage());
         }
     }
 
@@ -84,7 +84,7 @@ class SiswaController extends BaseController
             $siswa = Siswa::findOrFail($id);
             return $this->sendResponse(new SiswaResource($siswa), "siswa retrieved successfully");
         } catch (\Throwable $th) {
-            return $this->sendResponse("error retrieving siswa", $th->getMessage());
+            return $this->sendError("error retrieving siswa", $th->getMessage());
         }
     }
 
@@ -126,7 +126,7 @@ class SiswaController extends BaseController
             $siswa->save();
             return $this->sendResponse($siswa, 'siswa updated successfully');
         } catch (\Throwable $th) {
-            return $this->sendResponse('error updating siswa', $th->getMessage());
+            return $this->sendError('error updating siswa', $th->getMessage());
         }
     }
 
@@ -143,7 +143,31 @@ class SiswaController extends BaseController
             $siswa->delete();
             return $this->sendResponse($siswa, "siswa deleted successfully");
         } catch (\Throwable $th) {
-            return $this->sendResponse("error deleting siswa", $th->getMessage());
+            return $this->sendError("error deleting siswa", $th->getMessage());
+        }
+    }
+
+    public function register(Request $request)
+    {
+        try {
+            $this->validate($request, self::VALIDATION_RULES);
+            $siswa = new Siswa;
+            $siswa->nama = $request->nama;
+            $siswa->email = $request->email;
+            $siswa->password = bcrypt($request->password);
+            $siswa->tempat = $request->tempat;
+            $siswa->tgl_lahir = $request->tgl_lahir;
+            $siswa->jns_kelamin = $request->jns_kelamin;
+            $siswa->agama = $request->agama;
+            $siswa->nama_ayah = $request->nama_ayah;
+            $siswa->nama_ibu = $request->nama_ibu;
+            $siswa->alamat = $request->alamat;
+            $siswa->telepon = $request->telepon;
+            $siswa->kd_pos = $request->kd_pos;
+            $siswa->save();
+            return $this->sendResponse(new SiswaResource($siswa), 'siswa created successfully');
+        } catch (\Throwable $th) {
+            return $this->sendError('error creating siswa', $th->getMessage());
         }
     }
 }

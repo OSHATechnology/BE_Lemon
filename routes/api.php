@@ -22,6 +22,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/auth/login', [AuthenticatedController::class, 'store']);
 Route::post('/auth/logout', [AuthenticatedController::class, 'destroy'])->middleware('auth:sanctum');
+Route::post('/auth/register', [SiswaController::class, 'register']);
+// Route::post('/auth/register', function ()
+// {
+//     dd("hallo");
+// });
 // Route::post('/logout', [AuthenticatedController::class, 'destroy'])->middleware('auth:sanctum');
 
 Route::middleware(['auth:sanctum'])->group(function () {
