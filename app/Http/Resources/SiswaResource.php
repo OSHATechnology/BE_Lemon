@@ -27,6 +27,7 @@ class SiswaResource extends JsonResource
         return [
             'idSiswa' => $this->idSiswa,
             'nama' => $this->nama,
+            'nisn' => $this->nisn,
             'email' => $this->email,
             'password' => $this->password,
             'tempat' => $this->tempat,

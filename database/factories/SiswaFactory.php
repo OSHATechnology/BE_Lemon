@@ -18,6 +18,7 @@ class SiswaFactory extends Factory
     {
         return [
             'nama' => $this->faker->name,
+            'nisn' => $this->faker->nisn,
             'email' => $this->faker->unique()->safeEmail,
             'password' => bcrypt('password'),
             'tempat' => $this->faker->city,
