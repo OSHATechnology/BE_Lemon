@@ -25,6 +25,8 @@ Route::post('/auth/login', [AuthenticatedController::class, 'store']);
 Route::post('/auth/logout', [AuthenticatedController::class, 'destroy'])->middleware('auth:sanctum');
 Route::post('/auth/register', [SiswaController::class, 'register']);
 Route::put('/auth/update-siswa/{id}', [SiswaController::class, 'update']);
+Route::delete('/auth/hapus-siswa/{id}', [SiswaController::class, 'destroy']);
+
 // Route::post('/auth/register', function ()
 // {
 //     dd("hallo");
