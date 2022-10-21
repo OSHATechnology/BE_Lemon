@@ -23,7 +23,7 @@ class SiswaFactory extends Factory
             'password' => bcrypt('password'),
             'tempat' => $this->faker->city,
             'tgl_lahir' => $this->faker->date(),
-            'jns_kelamin' => $this->faker->randomElement(['laki-laki', 'perempuan']),
+            'jns_kelamin' => $this->faker->randomElement(['laki-laki', 'perempuan', 'lainnya']),
             'agama' => 'islam',
             'nama_ayah' => $this->faker->name,
             'nama_ibu' => $this->faker->name,
