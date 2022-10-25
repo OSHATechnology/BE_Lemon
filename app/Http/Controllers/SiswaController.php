@@ -68,6 +68,7 @@ class SiswaController extends BaseController
             $siswa->telepon = $request->telepon;
             $siswa->kd_pos = $request->kd_pos;
             $siswa->save();
+
             return $this->sendResponse(new SiswaResource($siswa), 'siswa created successfully');
         } catch (\Throwable $th) {
             return $this->sendError('error creating siswa', $th->getMessage());
@@ -175,4 +176,5 @@ class SiswaController extends BaseController
             return $this->sendError('error creating siswa', $th->getMessage());
         }
     }
+
 }

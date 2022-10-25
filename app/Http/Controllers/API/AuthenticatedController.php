@@ -61,4 +61,10 @@ class AuthenticatedController extends BaseController
 
         return $this->sendResponse([], 'User logout successfully.');
     }
+
+
+    public function me()
+      {
+        return response()->json(auth()->user());
+      }
 }

@@ -22,7 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/auth/siswas', [SiswaController::class, 'index']);
 Route::get('/auth/edit-siswa/{id}', [SiswaController::class, 'show']);
 Route::post('/auth/login', [AuthenticatedController::class, 'store']);
-Route::post('/auth/logout', [AuthenticatedController::class, 'destroy'])->middleware('auth:sanctum');
+Route::post('/logout', [AuthenticatedController::class, 'destroy'])->middleware('auth:sanctum');
 Route::post('/auth/register', [SiswaController::class, 'register']);
 Route::put('/auth/update-siswa/{id}', [SiswaController::class, 'update']);
 Route::delete('/auth/hapus-siswa/{id}', [SiswaController::class, 'destroy']);
