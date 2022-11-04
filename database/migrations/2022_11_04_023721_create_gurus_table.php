@@ -16,7 +16,7 @@ return new class extends Migration
          // Penting untuk tim lemon!!!
         // Penjelasan : yang di comment ini untuk template pembuatan migration
         // (WAJIB HAPUS COMMENT TEMPLATE JIKA TIDAK DIPAKAI) 
-        Schema::create('guru', function (Blueprint $table) {
+        Schema::create('gurus', function (Blueprint $table) {
             $table->id('idGuru');
             // kode dibawah jika memiliki relasi sesuai dengan field rancangan database
             // $table->unsignedBigInteger('idNilai');
