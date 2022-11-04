@@ -7,6 +7,23 @@ use Illuminate\Http\Request;
 
 class GuruController extends Controller
 {
+    // Perhatian untuk tim lemon !!!
+    // Jangan lupa hapus comment ini jika tidak diperlukan lagi
+    // Kode dibawah ini untuk memvalidasi input user, cek selengkapnya di dokumentasi
+    const VALIDATION_RULES = [
+        'nama' => 'required|string|max:255',
+        'nisn' => 'required|string|max:255',
+        'email' => 'required|string|max:255',
+        'password' => 'required|string|max:255',
+        'tempat' => 'required|string|max:255',
+        'tgl_lahir' => 'required|date',
+        'jns_kelamin' => 'required|string|max:255',
+        'agama' => 'required|string|max:255',
+        'alamat' => 'required|string|max:255',
+        'telepon' => 'required|string|max:255',
+        'kd_pos' => 'required|string|max:255',
+    ];
+    const NumPaginate = 5;
     /**
      * Display a listing of the resource.
      *
@@ -14,17 +31,12 @@ class GuruController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        try {
+            $guru = (guruResource::collection(guru::all()));
+            return $this->sendResponse($guru, "guru retrieved successfully");
+        } catch (\Throwable $th) {
+            return $this->sendError("error guru retrieved successfully", $th->getMessage());
+        }
     }
 
     /**
@@ -35,7 +47,26 @@ class GuruController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $this->validate($request, self::VALIDATION_RULES);
+            $guru = new guru;
+            $guru->nama = $request->nama;
+            $guru->nisn = $request->nisn;
+            $guru->email = $request->email;
+            $guru->password = bcrypt($request->password);
+            $guru->tempat = $request->tempat;
+            $guru->tgl_lahir = $request->tgl_lahir;
+            $guru->jns_kelamin = $request->jns_kelamin;
+            $guru->agama = $request->agama;
+            $guru->alamat = $request->alamat;
+            $guru->telepon = $request->telepon;
+            $guru->kd_pos = $request->kd_pos;
+            $guru->save();
+
+            return $this->sendResponse(new guruResource($guru), 'guru created successfully');
+        } catch (\Throwable $th) {
+            return $this->sendError('error creating guru', $th->getMessage());
+        }
     }
 
     /**
@@ -44,20 +75,14 @@ class GuruController extends Controller
      * @param  \App\Models\guru  $guru
      * @return \Illuminate\Http\Response
      */
-    public function show(guru $guru)
+    public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\guru  $guru
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(guru $guru)
-    {
-        //
+        try {
+            $guru = guru::findOrFail($id);
+            return $this->sendResponse(new guruResource($guru), "guru retrieved successfully");
+        } catch (\Throwable $th) {
+            return $this->sendError("error retrieving guru", $th->getMessage());
+        }
     }
 
     /**
@@ -67,9 +92,37 @@ class GuruController extends Controller
      * @param  \App\Models\guru  $guru
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, guru $guru)
+    public function update(Request $request, $id)
     {
-        //
+        try {
+            $request->validate([
+                'nama' => 'required|string|max:255',
+                'nisn' => 'required|string|max:255',
+                'email' => 'required|string|max:255',
+                'tempat' => 'required|string|max:255',
+                'tgl_lahir' => 'required|date',
+                'jns_kelamin' => 'required|string|max:255',
+                'agama' => 'required|string|max:255',
+                'alamat' => 'required|string|max:255',
+                'telepon' => 'required|string|max:255',
+                'kd_pos' => 'required|string|max:255',
+            ]);
+            $guru = guru::findOrFail($id);
+            $guru->nama = $request->nama;
+            $guru->nisn = $request->nisn;
+            $guru->email = $request->email;
+            $guru->tempat = $request->tempat;
+            $guru->tgl_lahir = $request->tgl_lahir;
+            $guru->jns_kelamin = $request->jns_kelamin;
+            $guru->agama = $request->agama;
+            $guru->alamat = $request->alamat;
+            $guru->telepon = $request->telepon;
+            $guru->kd_pos = $request->kd_pos;
+            $guru->save();
+            return $this->sendResponse($guru, 'guru updated successfully');
+        } catch (\Throwable $th) {
+            return $this->sendError('error updating guru', $th->getMessage());
+        }
     }
 
     /**
@@ -78,8 +131,38 @@ class GuruController extends Controller
      * @param  \App\Models\guru  $guru
      * @return \Illuminate\Http\Response
      */
-    public function destroy(guru $guru)
+    public function destroy($id)
     {
-        //
+        try {
+            $guru = guru::findOrFail($id);
+            $guru->delete();
+            return $this->sendResponse($guru, "guru deleted successfully");
+        } catch (\Throwable $th) {
+            return $this->sendError("error deleting guru", $th->getMessage());
+        }
     }
+
+    public function register(Request $request)
+    {
+        try {
+            $this->validate($request, self::VALIDATION_RULES);
+            $guru = new guru;
+            $guru->nama = $request->nama;
+            $guru->nisn = $request->nisn;
+            $guru->email = $request->email;
+            $guru->password = bcrypt($request->password);
+            $guru->tempat = $request->tempat;
+            $guru->tgl_lahir = $request->tgl_lahir;
+            $guru->jns_kelamin = $request->jns_kelamin;
+            $guru->agama = $request->agama;
+            $guru->alamat = $request->alamat;
+            $guru->telepon = $request->telepon;
+            $guru->kd_pos = $request->kd_pos;
+            $guru->save();
+            return $this->sendResponse(new guruResource($guru), 'guru created successfully');
+        } catch (\Throwable $th) {
+            return $this->sendError('error creating guru', $th->getMessage());
+        }
+    }
+
 }

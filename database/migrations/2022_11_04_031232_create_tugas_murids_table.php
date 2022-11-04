@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('tugas_murids', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('tugas_id')->constrained('tugas');
-            $table->foreignId('siswa_id')->constrained('siswas');
+            $table->unsignedBigInteger('idTugas');
+            $table->unsignedBigInteger('idSiswa');
             $table->string('file');
             $table->string('nilai');
             $table->boolean('selesai');

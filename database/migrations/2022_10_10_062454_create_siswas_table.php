@@ -18,7 +18,7 @@ return new class extends Migration
         // (WAJIB HAPUS COMMENT TEMPLATE JIKA TIDAK DIPAKAI) 
         Schema::create('siswas', function (Blueprint $table) {
             $table->id('idSiswa');
-            $table->foreignId('id_kelas')->nullable()->constrained('kelas');
+            $table->unsignedBigInteger('idKelas')->nullable();
             // kode dibawah jika memiliki relasi sesuai dengan field rancangan database
             // $table->unsignedBigInteger('idNilai');
             // $table->unsignedBigInteger('idMapel');

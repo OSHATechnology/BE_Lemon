@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('materis', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('mapel_id')->constrained('mata_pelajaran')->onDelete('cascade');
-            $table->foreignId('kelas_id')->constrained('kelas')->onDelete('cascade');
+            $table->unsignedBigInteger('idMapel');
+            $table->unsignedBigInteger('idKelas');
             $table->string('judul');
             $table->string('deskripsi');
             $table->string('file');
