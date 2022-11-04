@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class TugasMurid extends Model
 {
     use HasFactory;
+    protected $table = 'tugas_murids';
+    protected $guarded = [];
+
+    protected $primaryKey = 'idTugasMurid';
 
     // Penting untuk tim lemon!!!
     // Penjelasan : yang di comment ini untuk template pembuatan migration
@@ -16,11 +20,11 @@ class TugasMurid extends Model
     // Jika terdapat relasi one to one, maka pakai kode dibawah ini, untuk relasi selain one to one bisa cek dokumentasi
     public function siswa()
     {
-        return $this->belongSTo('App/Models/Siswa');
+        return $this->belongSTo(Siswa::class, 'idSiswa', 'idSiswa');
     }
 
     public function tugas()
     {
-        return $this->belongSTo('App/Models/Tugas');
+        return $this->belongSTo(Tugas::class, 'idTugas', 'idTugas');
     }
 }

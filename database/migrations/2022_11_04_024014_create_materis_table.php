@@ -15,13 +15,20 @@ return new class extends Migration
     {
         Schema::create('materis', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('createdBy');
             $table->unsignedBigInteger('idMapel');
             $table->unsignedBigInteger('idKelas');
             $table->string('judul');
             $table->string('deskripsi');
-            $table->string('file');
+            $table->string('file')->nullable();
 
             $table->timestamps();
+        });
+
+        Schema::table('materis', function (Blueprint $table) {
+            $table->foreign('createdBy')->references('id')->on('gurus');
+            $table->foreign('idMapel')->references('id')->on('mata_pelajarans');
+            $table->foreign('idKelas')->references('id')->on('kelas');
         });
     }
 

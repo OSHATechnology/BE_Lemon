@@ -15,10 +15,14 @@ return new class extends Migration
     {
         Schema::create('tugas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('materi_id')->constrained('materis');
+            $table->unsignedBigInteger('idMateri');
             $table->string('judul_tugas');
             $table->string('deskripsi_tugas');
             $table->timestamps();
+        });
+
+        Schema::table('tugas', function (Blueprint $table) {
+            $table->foreign('idMateri')->references('id')->on('materis');
         });
     }
 

@@ -19,8 +19,13 @@ return new class extends Migration
             $table->unsignedBigInteger('idSiswa');
             $table->string('file');
             $table->string('nilai');
-            $table->boolean('selesai');
+            $table->enum('status', ['selesai', 'belum selesai']);
             $table->timestamps();
+        });
+
+        Schema::table('tugas_murids', function (Blueprint $table) {
+            $table->foreign('idTugas')->references('id')->on('tugas');
+            $table->foreign('idSiswa')->references('id')->on('siswas');
         });
     }
 

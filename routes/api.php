@@ -34,9 +34,9 @@ Route::resource('fileupload', 'FileuploadController');
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::post('upload',[ImageGallary::class,'saveImage']);
-Route::get('list',[ImageGallary::class,'dataList']);
-Route::get('delete/{id}',[ImageGallary::class,'deleteImg']);
+Route::post('upload', [ImageGallary::class, 'saveImage']);
+Route::get('list', [ImageGallary::class, 'dataList']);
+Route::get('delete/{id}', [ImageGallary::class, 'deleteImg']);
 
 // Route::post('/auth/register', function ()
 // {

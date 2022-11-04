@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-         // Penting untuk tim lemon!!!
+        // Penting untuk tim lemon!!!
         // Penjelasan : yang di comment ini untuk template pembuatan migration
         // (WAJIB HAPUS COMMENT TEMPLATE JIKA TIDAK DIPAKAI) 
         Schema::create('gurus', function (Blueprint $table) {
-            $table->id('idGuru');
+            $table->id();
             // kode dibawah jika memiliki relasi sesuai dengan field rancangan database
             // $table->unsignedBigInteger('idNilai');
             // $table->unsignedBigInteger('idMapel');
@@ -37,7 +37,7 @@ return new class extends Migration
             $table->timestamps();
 
             // Kode agar dapat berelasi dengan table lain
-            
+
             // $table->foreign('A')->references('B')->on('C')
 
             // Keterangan :

@@ -11,15 +11,15 @@ class Tugas extends Model
     protected $table = 'tugas';
     protected $guarded = [];
 
-    protected $primaryKey = 'idSiswa';
+    protected $primaryKey = 'idTugas';
 
-
-  
     public function materi()
     {
-        return $this->belongsTo(Materi::class, 'idNilai', 'idNilai');
+        return $this->hasOne(Materi::class, 'idMateri', 'idMateri');
     }
 
+    public function tugasMurid()
+    {
+        return $this->hasMany(TugasMurid::class, 'idTugas', 'idTugas');
+    }
 }
-
-
