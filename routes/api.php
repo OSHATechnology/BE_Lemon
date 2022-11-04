@@ -21,11 +21,22 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::get('/auth/siswas', [SiswaController::class, 'index']);
 Route::get('/auth/edit-siswa/{id}', [SiswaController::class, 'show']);
-Route::post('/auth/login', [AuthenticatedController::class, 'store']);
-Route::post('/logout', [AuthenticatedController::class, 'destroy'])->middleware('auth:sanctum');
+Route::post('/auth/login', [AuthenticatedController::class, 'login']);
+Route::post('/auth/logout', [AuthenticatedController::class, 'logout']);
+Route::post('/auth/refresh', [AuthenticatedController::class, 'refresh']);
+//Route::post('/auth/logout', [AuthenticatedController::class, 'destroy'])->middleware('auth:sanctum');
+Route::post('/auth/me', [AuthenticatedController::class, 'me']);
 Route::post('/auth/register', [SiswaController::class, 'register']);
 Route::put('/auth/update-siswa/{id}', [SiswaController::class, 'update']);
 Route::delete('/auth/hapus-siswa/{id}', [SiswaController::class, 'destroy']);
+Route::resource('fileupload', 'FileuploadController');
+
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+    return $request->user();
+});
+Route::post('upload',[ImageGallary::class,'saveImage']);
+Route::get('list',[ImageGallary::class,'dataList']);
+Route::get('delete/{id}',[ImageGallary::class,'deleteImg']);
 
 // Route::post('/auth/register', function ()
 // {

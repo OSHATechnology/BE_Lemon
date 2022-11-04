@@ -6,8 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class Siswa extends Authenticatable
+class Siswa extends Authenticatable implements JWTSubject
 {
     use HasApiTokens,HasFactory;
 
@@ -43,4 +44,13 @@ class Siswa extends Authenticatable
     // {
     //     return $this->hasOne(Nilai::class, 'idNilai', 'idNilai');
     // }
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
 }
