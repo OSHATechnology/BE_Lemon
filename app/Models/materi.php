@@ -14,15 +14,24 @@ class Materi extends Model
     protected $primaryKey = 'idMateri';
 
 
-  
+    public function guru()
+    {
+        return $this->belongsTo(Guru::class, 'createdBy', 'idGuru');
+    }
+
     public function matapelajaran()
     {
-        return $this->belongsTo('App/Models/MataPelajaran');
+        return $this->belongsTo(MataPelajaran::class, 'idMapel', 'idMapel');
     }
+
 
     public function kelas()
     {
-        return $this->belongsTo('App/Models/Kelas');
+        return $this->belongsTo(Kelas::class, 'idKelas', 'idKelas');
     }
 
+    public function tugas()
+    {
+        return $this->hasOne(Tugas::class, 'idTugas', 'idTugas');
+    }
 }

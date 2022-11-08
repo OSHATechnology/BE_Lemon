@@ -10,7 +10,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class Siswa extends Authenticatable implements JWTSubject
 {
-    use HasApiTokens,HasFactory;
+    use HasApiTokens, HasFactory;
 
     protected $table = 'siswas';
 
@@ -54,8 +54,19 @@ class Siswa extends Authenticatable implements JWTSubject
         return [];
     }
 
+<<<<<<< HEAD
     public function tugasmurid()
     {
         return $this->hasMany('App/Models/TugasMurid');
+=======
+    public function kelas()
+    {
+        return $this->belongsTo(Kelas::class, 'idKelas', 'idKelas');
+    }
+
+    public function tugasMurid()
+    {
+        return $this->hasMany(TugasMurid::class, 'idSiswa', 'idSiswa');
+>>>>>>> 084164ee91997a716b966fab11fad95d1bd62349
     }
 }

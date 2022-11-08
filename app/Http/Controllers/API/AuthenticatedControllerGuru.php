@@ -7,7 +7,7 @@ use App\Models\Guru;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class AuthenticatedController extends BaseController
+class AuthenticatedControllerGuru extends BaseController
 {
 
     public function username()
@@ -24,21 +24,21 @@ class AuthenticatedController extends BaseController
     public function store(Request $request)
     {
         try {
-          $user = Guru::where('email', $request->email)->first();
-          if (!$user) {
-            return $this->sendError('username', $this->username() . ' not found', 401);
-          }
-          if (!Auth::attempt($request->only($this->username(), 'password'), $request->remember_me)) {
-            return $this->sendError('password', 'Wrong Password', 401);
-          }
-          
-          $token = $user->createToken('token')->plainTextToken;
-          $dataUser = [
-            'id' => $user->idGuru,
-            'name' => $user->nama,
-            'email' => $user->email,
-            'token' => $token
-          ];
+            $user = Guru::where('email', $request->email)->first();
+            if (!$user) {
+                return $this->sendError('username', $this->username() . ' not found', 401);
+            }
+            if (!Auth::attempt($request->only($this->username(), 'password'), $request->remember_me)) {
+                return $this->sendError('password', 'Wrong Password', 401);
+            }
+
+            $token = $user->createToken('token')->plainTextToken;
+            $dataUser = [
+                'id' => $user->id,
+                'name' => $user->nama,
+                'email' => $user->email,
+                'token' => $token
+            ];
 
             $response = [
                 'user' => $dataUser
@@ -62,7 +62,7 @@ class AuthenticatedController extends BaseController
         return $this->sendResponse([], 'User logout successfully.');
     }
 
-//
+    //
 
     /**
      * Create a new AuthController instance.
@@ -83,7 +83,7 @@ class AuthenticatedController extends BaseController
     {
         $credentials = request(['email', 'password']);
 
-        if (! $token = auth()->attempt($credentials)) {
+        if (!$token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Data Tidak Ditemukan, Silahkan Daftar Terlebih Dahulu'], 401);
         }
 
@@ -137,6 +137,4 @@ class AuthenticatedController extends BaseController
             'expires_in' => auth()->factory()->getTTL() * 120
         ]);
     }
-
-    
 }

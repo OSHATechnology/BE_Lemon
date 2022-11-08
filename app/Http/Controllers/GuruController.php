@@ -4,12 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\guru;
 use Illuminate\Http\Request;
+use App\Http\Resources\GuruResource;
 
 class GuruController extends Controller
 {
-    // Perhatian untuk tim lemon !!!
-    // Jangan lupa hapus comment ini jika tidak diperlukan lagi
-    // Kode dibawah ini untuk memvalidasi input user, cek selengkapnya di dokumentasi
     const VALIDATION_RULES = [
         'nama' => 'required|string|max:255',
         'nip' => 'required|string|max:255',
@@ -32,7 +30,7 @@ class GuruController extends Controller
     public function index()
     {
         try {
-            $guru = (guruResource::collection(guru::all()));
+            $guru = (GuruResource::collection(Guru::all()));
             return $this->sendResponse($guru, "guru retrieved successfully");
         } catch (\Throwable $th) {
             return $this->sendError("error guru retrieved successfully", $th->getMessage());
@@ -63,7 +61,7 @@ class GuruController extends Controller
             $guru->kd_pos = $request->kd_pos;
             $guru->save();
 
-            return $this->sendResponse(new guruResource($guru), 'guru created successfully');
+            return $this->sendResponse(new GuruResource($guru), 'guru created successfully');
         } catch (\Throwable $th) {
             return $this->sendError('error creating guru', $th->getMessage());
         }
@@ -78,8 +76,8 @@ class GuruController extends Controller
     public function show($id)
     {
         try {
-            $guru = guru::findOrFail($id);
-            return $this->sendResponse(new guruResource($guru), "guru retrieved successfully");
+            $guru = Guru::findOrFail($id);
+            return $this->sendResponse(new GuruResource($guru), "guru retrieved successfully");
         } catch (\Throwable $th) {
             return $this->sendError("error retrieving guru", $th->getMessage());
         }
@@ -107,7 +105,7 @@ class GuruController extends Controller
                 'telepon' => 'required|string|max:255',
                 'kd_pos' => 'required|string|max:255',
             ]);
-            $guru = guru::findOrFail($id);
+            $guru = Guru::findOrFail($id);
             $guru->nama = $request->nama;
             $guru->nip = $request->nip;
             $guru->email = $request->email;
@@ -134,7 +132,7 @@ class GuruController extends Controller
     public function destroy($id)
     {
         try {
-            $guru = guru::findOrFail($id);
+            $guru = Guru::findOrFail($id);
             $guru->delete();
             return $this->sendResponse($guru, "guru deleted successfully");
         } catch (\Throwable $th) {
@@ -146,7 +144,7 @@ class GuruController extends Controller
     {
         try {
             $this->validate($request, self::VALIDATION_RULES);
-            $guru = new guru;
+            $guru = new Guru;
             $guru->nama = $request->nama;
             $guru->nip = $request->nip;
             $guru->email = $request->email;
@@ -159,10 +157,9 @@ class GuruController extends Controller
             $guru->telepon = $request->telepon;
             $guru->kd_pos = $request->kd_pos;
             $guru->save();
-            return $this->sendResponse(new guruResource($guru), 'guru created successfully');
+            return $this->sendResponse(new GuruResource($guru), 'guru created successfully');
         } catch (\Throwable $th) {
             return $this->sendError('error creating guru', $th->getMessage());
         }
     }
-
 }

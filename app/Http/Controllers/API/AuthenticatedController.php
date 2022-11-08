@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\API\BaseController as BaseController;
+use App\Models\Guru;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,21 +25,29 @@ class AuthenticatedController extends BaseController
     public function store(Request $request)
     {
         try {
-          $user = Siswa::where('email', $request->email)->first();
-          if (!$user) {
-            return $this->sendError('username', $this->username() . ' not found', 401);
-          }
-          if (!Auth::attempt($request->only($this->username(), 'password'), $request->remember_me)) {
-            return $this->sendError('password', 'Wrong Password', 401);
-          }
-          
-          $token = $user->createToken('token')->plainTextToken;
-          $dataUser = [
-            'id' => $user->idSiswa,
-            'name' => $user->nama,
-            'email' => $user->email,
-            'token' => $token
-          ];
+            $user = Siswa::where('email', $request->email)->first();
+            if (!$user) {
+                $user = Guru::where('email', $request->email)->first();
+
+                if (!$user) {
+                    return $this->sendError('username', $this->username() . ' not found', 401);
+                }
+                if (!Auth::attempt($request->only($this->username(), 'password'), $request->remember_me)) {
+                    return $this->sendError('password', 'Wrong Password', 401);
+                }
+            }
+
+            if (!Auth::attempt($request->only($this->username(), 'password'), $request->remember_me)) {
+                return $this->sendError('password', 'Wrong Password', 401);
+            }
+
+            $token = $user->createToken('token')->plainTextToken;
+            $dataUser = [
+                'id' => $user->id,
+                'name' => $user->nama,
+                'email' => $user->email,
+                'token' => $token
+            ];
 
             $response = [
                 'user' => $dataUser
@@ -46,7 +55,7 @@ class AuthenticatedController extends BaseController
 
             return $this->sendResponse($response, 'User login successfully.');
         } catch (\Throwable $th) {
-            return $this->sendError('Unautorized.', ['error' => 'Unautorized'], 401);
+            return $this->sendError('Unauthorized.', ['error' => 'Unauthorized'], 401);
         }
     }
 
@@ -62,7 +71,7 @@ class AuthenticatedController extends BaseController
         return $this->sendResponse([], 'User logout successfully.');
     }
 
-//
+    //
 
     /**
      * Create a new AuthController instance.
@@ -83,7 +92,7 @@ class AuthenticatedController extends BaseController
     {
         $credentials = request(['email', 'password']);
 
-        if (! $token = auth()->attempt($credentials)) {
+        if (!$token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Data Tidak Ditemukan, Silahkan Daftar Terlebih Dahulu'], 401);
         }
 
@@ -137,6 +146,4 @@ class AuthenticatedController extends BaseController
             'expires_in' => auth()->factory()->getTTL() * 120
         ]);
     }
-
-    
 }

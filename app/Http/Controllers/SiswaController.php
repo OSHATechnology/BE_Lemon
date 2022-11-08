@@ -9,12 +9,10 @@ use Illuminate\Http\Request;
 
 class SiswaController extends BaseController
 {
-    // Perhatian untuk tim lemon !!!
-    // Jangan lupa hapus comment ini jika tidak diperlukan lagi
-    // Kode dibawah ini untuk memvalidasi input user, cek selengkapnya di dokumentasi
     const VALIDATION_RULES = [
         'nama' => 'required|string|max:255',
         'nisn' => 'required|string|max:255',
+        'idKelas' => 'nullable',
         'email' => 'required|string|max:255',
         'password' => 'required|string|max:255',
         'tempat' => 'required|string|max:255',
@@ -56,6 +54,7 @@ class SiswaController extends BaseController
             $siswa = new Siswa;
             $siswa->nama = $request->nama;
             $siswa->nisn = $request->nisn;
+            $siswa->idKelas = $request->idKelas;
             $siswa->email = $request->email;
             $siswa->password = bcrypt($request->password);
             $siswa->tempat = $request->tempat;
@@ -104,6 +103,7 @@ class SiswaController extends BaseController
             $request->validate([
                 'nama' => 'required|string|max:255',
                 'nisn' => 'required|string|max:255',
+                'idKelas' => 'nullable',
                 'email' => 'required|string|max:255',
                 'tempat' => 'required|string|max:255',
                 'tgl_lahir' => 'required|date',
@@ -118,6 +118,7 @@ class SiswaController extends BaseController
             $siswa = Siswa::findOrFail($id);
             $siswa->nama = $request->nama;
             $siswa->nisn = $request->nisn;
+            $siswa->idKelas = $request->idKelas;
             $siswa->email = $request->email;
             $siswa->tempat = $request->tempat;
             $siswa->tgl_lahir = $request->tgl_lahir;
@@ -159,6 +160,7 @@ class SiswaController extends BaseController
             $siswa = new Siswa;
             $siswa->nama = $request->nama;
             $siswa->nisn = $request->nisn;
+            $siswa->idKelas = $request->idKelas;
             $siswa->email = $request->email;
             $siswa->password = bcrypt($request->password);
             $siswa->tempat = $request->tempat;
@@ -176,5 +178,4 @@ class SiswaController extends BaseController
             return $this->sendError('error creating siswa', $th->getMessage());
         }
     }
-
 }

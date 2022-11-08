@@ -31,7 +31,8 @@ class Guru extends Model
 
     protected $primaryKey = 'idGuru';
 
-
-  
-   
+    public function materi()
+    {
+        return $this->hasMany(Materi::class, 'idGuru', 'createdBy');
+    }
 }

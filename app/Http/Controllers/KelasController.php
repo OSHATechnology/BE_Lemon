@@ -4,9 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Kelas;
 use Illuminate\Http\Request;
+use App\Http\Resources\KelasResource;
 
 class KelasController extends Controller
 {
+    const VALIDATION_RULES = [
+        'nama_kelas' => 'required|string|max:255',
+        'tingkat' => 'required|numeric|max:255',
+    ];
+    const NumPaginate = 5;
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +20,12 @@ class KelasController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            $kelas = (KelasResource::collection(Kelas::all()));
+            return $this->sendResponse($kelas, "kelas retrieved successfully");
+        } catch (\Throwable $th) {
+            return $this->sendError("error kelas retrieved successfully", $th->getMessage());
+        }
     }
 
     /**
@@ -24,7 +35,7 @@ class KelasController extends Controller
      */
     public function create()
     {
-        //
+        // 
     }
 
     /**
@@ -35,7 +46,17 @@ class KelasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $this->validate($request, self::VALIDATION_RULES);
+            $kelas = new Kelas();
+            $kelas->nama_kelas = $request->nama_kelas;
+            $kelas->tingkat = $request->tingkat;
+            $kelas->save();
+
+            return $this->sendResponse(new KelasResource($kelas), 'kelas created successfully');
+        } catch (\Throwable $th) {
+            return $this->sendError('error creating kelas', $th->getMessage());
+        }
     }
 
     /**
@@ -44,9 +65,14 @@ class KelasController extends Controller
      * @param  \App\Models\Kelas  $kelas
      * @return \Illuminate\Http\Response
      */
-    public function show(Kelas $kelas)
+    public function show(Kelas $kelas, $id)
     {
-        //
+        try {
+            $kelas = Kelas::findOrFail($id);
+            return $this->sendResponse(new KelasResource($kelas), "kelas retrieved successfully");
+        } catch (\Throwable $th) {
+            return $this->sendError("error retrieving kelas", $th->getMessage());
+        }
     }
 
     /**
@@ -67,9 +93,20 @@ class KelasController extends Controller
      * @param  \App\Models\Kelas  $kelas
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Kelas $kelas)
+    public function update(Request $request, Kelas $kelas, $id)
     {
-        //
+        try {
+            $request->validate([
+                'nama_kelas' => 'required|string|max:255',
+            ]);
+            $kelas = kelas::findOrFail($id);
+            $kelas->nama_kelas = $request->nama_kelas;
+            $kelas->tingkat = $request->tingkat;
+            $kelas->save();
+            return $this->sendResponse($kelas, 'kelas updated successfully');
+        } catch (\Throwable $th) {
+            return $this->sendError('error updating kelas', $th->getMessage());
+        }
     }
 
     /**
@@ -78,8 +115,14 @@ class KelasController extends Controller
      * @param  \App\Models\Kelas  $kelas
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Kelas $kelas)
+    public function destroy(Kelas $kelas, $id)
     {
-        //
+        try {
+            $kelas = Kelas::findOrFail($id);
+            $kelas->delete();
+            return $this->sendResponse($kelas, "kelas deleted successfully");
+        } catch (\Throwable $th) {
+            return $this->sendError("error deleting kelas", $th->getMessage());
+        }
     }
 }
