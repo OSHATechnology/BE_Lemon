@@ -25,7 +25,7 @@ return new class extends Migration
 
         Schema::table('tugas_murids', function (Blueprint $table) {
             $table->foreign('idTugas')->references('id')->on('tugas');
-            $table->foreign('idSiswa')->references('id')->on('siswas');
+            $table->foreign('idSiswa')->references('idSiswa')->on('siswas');
         });
     }
 

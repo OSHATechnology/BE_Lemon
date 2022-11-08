@@ -17,8 +17,8 @@ return new class extends Migration
         // Penjelasan : yang di comment ini untuk template pembuatan migration
         // (WAJIB HAPUS COMMENT TEMPLATE JIKA TIDAK DIPAKAI) 
         Schema::create('siswas', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('idKelas');
+            $table->id('idSiswa');
+            $table->unsignedBigInteger('idKelas')->nullable();
             // kode dibawah jika memiliki relasi sesuai dengan field rancangan database
             // $table->unsignedBigInteger('idNilai');
             // $table->unsignedBigInteger('idMapel');

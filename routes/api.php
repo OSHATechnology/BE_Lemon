@@ -82,7 +82,7 @@ Route::put('/materi/update/{id}', [MateriController::class, 'update']);
 Route::delete('/materi/delete/{id}', [MateriController::class, 'destroy']);
 
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::apiResource('Materi', MateriController::class);
+    Route::apiResource('materi', MateriController::class);
 });
 // Materi
 
