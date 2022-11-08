@@ -34,7 +34,7 @@ class AuthenticatedControllerGuru extends BaseController
 
             $token = $user->createToken('token')->plainTextToken;
             $dataUser = [
-                'id' => $user->id,
+                'id' => $user->idGuru,
                 'name' => $user->nama,
                 'email' => $user->email,
                 'token' => $token

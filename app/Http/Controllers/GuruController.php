@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\guru;
 use Illuminate\Http\Request;
 use App\Http\Resources\GuruResource;
+use App\Http\Controllers\API\BaseController;
 
-class GuruController extends Controller
+class GuruController extends BaseController
 {
     const VALIDATION_RULES = [
         'nama' => 'required|string|max:255',
