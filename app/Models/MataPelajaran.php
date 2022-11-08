@@ -13,16 +13,8 @@ class MataPelajaran extends Model
 
     protected $primaryKey = 'idMapel';
 
-<<<<<<< HEAD
-
-  
-    public function tugas()
-    {
-        return $this->hasMany('App/Models/Tugas');
-=======
     public function materi()
     {
         return $this->hasMany(MataPelajaran::class, 'idMapel', 'idMapel');
->>>>>>> 084164ee91997a716b966fab11fad95d1bd62349
     }
 }

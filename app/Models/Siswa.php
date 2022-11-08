@@ -45,6 +45,7 @@ class Siswa extends Authenticatable implements JWTSubject
     // {
     //     return $this->hasOne(Nilai::class, 'idNilai', 'idNilai');
     // }
+
     public function kelas()
     {
         return $this->belongsTo(Kelas::class, 'idKelas', 'idKelas');
