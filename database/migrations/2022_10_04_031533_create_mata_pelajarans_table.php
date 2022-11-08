@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('mata_pelajarans', function (Blueprint $table) {
-            $table->id();
+            $table->id('idMapel');
             $table->string('nama_mapel');
             $table->string('deskripsi_mapel');
             $table->timestamps();

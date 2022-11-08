@@ -17,8 +17,8 @@ return new class extends Migration
         // Penjelasan : yang di comment ini untuk template pembuatan migration
         // (WAJIB HAPUS COMMENT TEMPLATE JIKA TIDAK DIPAKAI) 
         Schema::create('siswas', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('idKelas');
+            $table->id('idSiswa');
+            $table->unsignedBigInteger('idKelas')->nullable();
             // kode dibawah jika memiliki relasi sesuai dengan field rancangan database
             // $table->unsignedBigInteger('idNilai');
             // $table->unsignedBigInteger('idMapel');
@@ -38,7 +38,6 @@ return new class extends Migration
             $table->string('telepon')->nullable();
             $table->string('kd_pos')->nullable();
             $table->timestamps();
-
             // Kode agar dapat berelasi dengan table lain
 
             // $table->foreign('A')->references('B')->on('C')
@@ -51,7 +50,7 @@ return new class extends Migration
         });
 
         Schema::table('siswas', function (Blueprint $table) {
-            $table->foreign('idKelas')->references('id')->on('kelas');
+            $table->foreign('idKelas')->references('idKelas')->on('kelas');
         });
     }
 

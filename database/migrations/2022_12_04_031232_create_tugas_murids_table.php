@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tugas_murids', function (Blueprint $table) {
-            $table->id();
+            $table->id('idTugaMurid');
             $table->unsignedBigInteger('idTugas');
             $table->unsignedBigInteger('idSiswa');
             $table->string('file');
@@ -24,8 +24,8 @@ return new class extends Migration
         });
 
         Schema::table('tugas_murids', function (Blueprint $table) {
-            $table->foreign('idTugas')->references('id')->on('tugas');
-            $table->foreign('idSiswa')->references('id')->on('siswas');
+            $table->foreign('idTugas')->references('idTugas')->on('tugas');
+            $table->foreign('idSiswa')->references('idSiswa')->on('siswas');
         });
     }
 

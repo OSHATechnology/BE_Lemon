@@ -17,8 +17,8 @@ class SiswaSeeder extends Seeder
     public function run()
     {
         $siswa = [
-            'idSiswa' => 1,
             'nama' => 'ujang',
+            'nisn' => '123123123',
             'email' => 'ujang@gmail.com',
             'password' => bcrypt('ujang123'),
             'tempat' => 'Bandung',

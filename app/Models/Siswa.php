@@ -16,6 +16,7 @@ class Siswa extends Authenticatable implements JWTSubject
 
     protected $fillable = [
         'idSiswa',
+        'idKelas',
         'nama',
         'nisn',
         'email',
@@ -44,16 +45,6 @@ class Siswa extends Authenticatable implements JWTSubject
     // {
     //     return $this->hasOne(Nilai::class, 'idNilai', 'idNilai');
     // }
-    public function getJWTIdentifier()
-    {
-        return $this->getKey();
-    }
-
-    public function getJWTCustomClaims()
-    {
-        return [];
-    }
-
     public function kelas()
     {
         return $this->belongsTo(Kelas::class, 'idKelas', 'idKelas');
@@ -62,5 +53,15 @@ class Siswa extends Authenticatable implements JWTSubject
     public function tugasMurid()
     {
         return $this->hasMany(TugasMurid::class, 'idSiswa', 'idSiswa');
+    }
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
     }
 }

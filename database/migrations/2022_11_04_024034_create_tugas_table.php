@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tugas', function (Blueprint $table) {
-            $table->id();
+            $table->id('idTugas');
             $table->unsignedBigInteger('idMateri');
             $table->string('judul_tugas');
             $table->string('deskripsi_tugas');
@@ -22,7 +22,7 @@ return new class extends Migration
         });
 
         Schema::table('tugas', function (Blueprint $table) {
-            $table->foreign('idMateri')->references('id')->on('materis');
+            $table->foreign('idMateri')->references('idMateri')->on('materis');
         });
     }
 

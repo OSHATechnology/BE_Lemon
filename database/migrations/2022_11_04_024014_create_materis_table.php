@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('materis', function (Blueprint $table) {
-            $table->id();
+            $table->id('idMateri');
             $table->unsignedBigInteger('createdBy');
             $table->unsignedBigInteger('idMapel');
             $table->unsignedBigInteger('idKelas');
@@ -26,9 +26,9 @@ return new class extends Migration
         });
 
         Schema::table('materis', function (Blueprint $table) {
-            $table->foreign('createdBy')->references('id')->on('gurus');
-            $table->foreign('idMapel')->references('id')->on('mata_pelajarans');
-            $table->foreign('idKelas')->references('id')->on('kelas');
+            $table->foreign('createdBy')->references('idGuru')->on('gurus');
+            $table->foreign('idMapel')->references('idMapel')->on('mata_pelajarans');
+            $table->foreign('idKelas')->references('idKelas')->on('kelas');
         });
     }
 

@@ -18,12 +18,12 @@ class SiswaFactory extends Factory
     {
         return [
             'nama' => $this->faker->name,
-            'nisn' => $this->faker->nisn,
+            'nisn' => $this->faker->numerify,
             'email' => $this->faker->unique()->safeEmail,
             'password' => bcrypt('password'),
             'tempat' => $this->faker->city,
             'tgl_lahir' => $this->faker->date(),
-            'jns_kelamin' => $this->faker->randomElement(['laki-laki', 'perempuan', 'lainnya']),
+            'jns_kelamin' => $this->faker->randomElement(['laki-laki', 'perempuan']),
             'agama' => 'islam',
             'nama_ayah' => $this->faker->name,
             'nama_ibu' => $this->faker->name,
