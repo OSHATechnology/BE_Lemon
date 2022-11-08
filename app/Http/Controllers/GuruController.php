@@ -12,7 +12,7 @@ class GuruController extends Controller
     // Kode dibawah ini untuk memvalidasi input user, cek selengkapnya di dokumentasi
     const VALIDATION_RULES = [
         'nama' => 'required|string|max:255',
-        'nisn' => 'required|string|max:255',
+        'nip' => 'required|string|max:255',
         'email' => 'required|string|max:255',
         'password' => 'required|string|max:255',
         'tempat' => 'required|string|max:255',
@@ -51,7 +51,7 @@ class GuruController extends Controller
             $this->validate($request, self::VALIDATION_RULES);
             $guru = new guru;
             $guru->nama = $request->nama;
-            $guru->nisn = $request->nisn;
+            $guru->nip = $request->nip;
             $guru->email = $request->email;
             $guru->password = bcrypt($request->password);
             $guru->tempat = $request->tempat;
@@ -97,7 +97,7 @@ class GuruController extends Controller
         try {
             $request->validate([
                 'nama' => 'required|string|max:255',
-                'nisn' => 'required|string|max:255',
+                'nip' => 'required|string|max:255',
                 'email' => 'required|string|max:255',
                 'tempat' => 'required|string|max:255',
                 'tgl_lahir' => 'required|date',
@@ -109,7 +109,7 @@ class GuruController extends Controller
             ]);
             $guru = guru::findOrFail($id);
             $guru->nama = $request->nama;
-            $guru->nisn = $request->nisn;
+            $guru->nip = $request->nip;
             $guru->email = $request->email;
             $guru->tempat = $request->tempat;
             $guru->tgl_lahir = $request->tgl_lahir;
@@ -148,7 +148,7 @@ class GuruController extends Controller
             $this->validate($request, self::VALIDATION_RULES);
             $guru = new guru;
             $guru->nama = $request->nama;
-            $guru->nisn = $request->nisn;
+            $guru->nip = $request->nip;
             $guru->email = $request->email;
             $guru->password = bcrypt($request->password);
             $guru->tempat = $request->tempat;

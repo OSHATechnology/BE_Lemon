@@ -53,4 +53,9 @@ class Siswa extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+    public function tugasmurid()
+    {
+        return $this->hasMany('App/Models/TugasMurid');
+    }
 }
