@@ -36,13 +36,13 @@ return [
     */
 
     'guards' => [
-      //  'web' => [
-      //      'driver' => 'session',
-      //      'provider' => 'users',
-     //   ],
+        //  'web' => [
+        //      'driver' => 'session',
+        //      'provider' => 'users',
+        //   ],
         'api' => [
-        'driver' => 'jwt',
-        'provider' => 'users',
+            'driver' => 'jwt',
+            'provider' => 'users',
         ],
     ],
 
@@ -69,13 +69,18 @@ return [
             'model' => App\Models\Siswa::class,
         ],
 
+        'teachers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Guru::class,
+        ],
+
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
     ],
 
-    
+
 
     /*
     |--------------------------------------------------------------------------

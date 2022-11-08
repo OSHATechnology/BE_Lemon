@@ -24,19 +24,19 @@ class AuthenticatedControllerGuru extends BaseController
     public function store(Request $request)
     {
         try {
-            $user = Guru::where('email', $request->email)->first();
-            if (!$user) {
+            $teacher = Guru::where('email', $request->email)->first();
+            if (!$teacher) {
                 return $this->sendError('username', $this->username() . ' not found', 401);
             }
             if (!Auth::attempt($request->only($this->username(), 'password'), $request->remember_me)) {
                 return $this->sendError('password', 'Wrong Password', 401);
             }
 
-            $token = $user->createToken('token')->plainTextToken;
+            $token = $teacher->createToken('token')->plainTextToken;
             $dataUser = [
-                'id' => $user->idGuru,
-                'name' => $user->nama,
-                'email' => $user->email,
+                'id' => $teacher->idGuru,
+                'name' => $teacher->nama,
+                'email' => $teacher->email,
                 'token' => $token
             ];
 
@@ -56,8 +56,8 @@ class AuthenticatedControllerGuru extends BaseController
     public function destroy()
     {
         Auth::guard('web')->logout();
-        $user = request()->user();
-        $user->tokens()->delete();
+        $teacher = request()->user();
+        $teacher->tokens()->delete();
 
         return $this->sendResponse([], 'User logout successfully.');
     }

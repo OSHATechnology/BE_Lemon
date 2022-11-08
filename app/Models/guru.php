@@ -4,12 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Sanctum\HasApiTokens;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class Guru extends Model
+class Guru extends Authenticatable implements JWTSubject
 {
-    use HasFactory;
+    use HasApiTokens, HasFactory;
+
     protected $table = 'gurus';
-    protected $guarded = [];
 
     protected $fillable = [
         'idGuru',
@@ -34,5 +37,15 @@ class Guru extends Model
     public function materi()
     {
         return $this->hasMany(Materi::class, 'idGuru', 'createdBy');
+    }
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
     }
 }

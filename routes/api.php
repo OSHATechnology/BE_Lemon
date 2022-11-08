@@ -113,8 +113,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
 });
 // Tugas
 
-
-
 Route::resource('fileupload', 'FileuploadController');
 Route::post('upload', [ImageGallary::class, 'saveImage']);
 Route::get('list', [ImageGallary::class, 'dataList']);

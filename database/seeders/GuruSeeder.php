@@ -2,12 +2,12 @@
 
 namespace Database\Seeders;
 
-use App\Models\Siswa;
+use App\Models\Guru;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class SiswaSeeder extends Seeder
+class GuruSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,17 +16,15 @@ class SiswaSeeder extends Seeder
      */
     public function run()
     {
-        $siswa = [
+        $guru = [
             'nama' => 'ujang',
-            'nisn' => '123123123',
-            'email' => 'ujang@gmail.com',
+            'nip' => '123123123',
+            'email' => 'oldujang@gmail.com',
             'password' => bcrypt('ujang123'),
             'tempat' => 'Bandung',
             'tgl_lahir' => now(),
             'jns_kelamin' => 'laki-laki',
             'agama' => 'islam',
-            'nama_ayah' => 'Asep Stroberi',
-            'nama_ibu' => 'Nila Kharisma',
             'alamat' => 'Jl Bojong Soang no 103, Bojong, Kota Bandung',
             'telepon' => '081212121212',
             'kd_pos' => '11111',
@@ -34,7 +32,7 @@ class SiswaSeeder extends Seeder
             'updated_at' => now(),
         ];
 
-        DB::table('siswas')->insert($siswa);
-        Siswa::factory()->count(10)->create();
+        DB::table('gurus')->insert($guru);
+        Guru::factory()->count(10)->create();
     }
 }
