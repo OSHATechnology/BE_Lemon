@@ -17,4 +17,9 @@ class Kelas extends Model
     {
         return $this->hasMany(Siswa::class, 'idKelas', 'idKelas');
     }
+
+    public function materi()
+    {
+        return $this->hasMany(Materi::class, 'idMateri', 'idMateri');
+    }
 }

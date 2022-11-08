@@ -82,7 +82,6 @@ class AuthenticatedController extends BaseController
     public function login()
     {
         $credentials = request(['email', 'password']);
-
         if (!$token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Data Tidak Ditemukan, Silahkan Daftar Terlebih Dahulu'], 401);
         }

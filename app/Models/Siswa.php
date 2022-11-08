@@ -34,8 +34,6 @@ class Siswa extends Authenticatable implements JWTSubject
         'updated_at',
     ];
 
-    protected $primaryKey = 'idSiswa';
-
     // Penting untuk tim lemon!!!
     // Penjelasan : yang di comment ini untuk template pembuatan migration
     // (WAJIB HAPUS COMMENT TEMPLATE JIKA TIDAK DIPAKAI)

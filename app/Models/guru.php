@@ -12,7 +12,7 @@ class Guru extends Model
     protected $guarded = [];
 
     protected $fillable = [
-        'idSiswa',
+        'idGuru',
         'nama',
         'nisn',
         'email',
