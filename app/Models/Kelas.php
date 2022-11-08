@@ -13,8 +13,21 @@ class Kelas extends Model
 
     protected $primaryKey = 'idKelas';
 
+<<<<<<< HEAD
+
+  
+    public function siswa()
+    {
+        return $this->hasMany('App/Models/Siswa');
+    }
+
+    public function materi()
+    {
+        return $this->hasMany('App/Models/Materi');
+=======
     public function siswa()
     {
         return $this->hasMany(Siswa::class, 'idKelas', 'idKelas');
+>>>>>>> 084164ee91997a716b966fab11fad95d1bd62349
     }
 }
